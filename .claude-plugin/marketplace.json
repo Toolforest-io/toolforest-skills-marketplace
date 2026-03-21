@@ -1,0 +1,17 @@
+{
+  "name": "toolforest-skills",
+  "description": "Agent skills for Toolforest MCP toolkits — Google Slides, Docs, Sheets, and more.",
+  "version": "1.0.0",
+  "author": "Toolforest (toolforest.io)",
+  "plugins": [
+    {
+      "name": "google-slides-toolforest",
+      "source": "./plugins/google-slides-toolforest",
+      "description": "Best practices for building Google Slides presentations via Toolforest MCP. Includes design patterns, font guidance, chart pipelines, image encoding gotchas, and slide verification checklists.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": ["google-slides", "presentations", "toolforest", "mcp", "design"],
+      "strict": true
+    }
+  ]
+}

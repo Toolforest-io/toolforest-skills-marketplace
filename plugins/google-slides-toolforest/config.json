@@ -1,0 +1,24 @@
+{
+  "theme": {
+    "background_dark": "#0D2137",
+    "background_light": "#E8F5EE",
+    "accent": "#00B874",
+    "text_on_dark": "#FFFFFF",
+    "text_on_light": "#0D2137",
+    "muted_on_dark": "#A8C4D4",
+    "muted_on_light": "#5A6B7A"
+  },
+  "fonts": {
+    "heading": "Montserrat",
+    "body": "Source Sans Pro"
+  },
+  "margins": {
+    "standard_inset_emu": 457200,
+    "element_gap_emu": 228600
+  },
+  "preferences": {
+    "alternate_backgrounds": true,
+    "header_bar_style": true,
+    "accent_divider_line": true
+  }
+}

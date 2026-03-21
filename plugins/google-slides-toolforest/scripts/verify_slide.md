@@ -1,0 +1,27 @@
+Run this checklist after building EVERY slide. Call get_slide_content_elements and inspect the result against each check below. Do not proceed to the next slide until all checks pass.
+## Layout Checks
+- No overlapping elements: Compare x/y positions + widths/heights of all elements. Flag any pair where bounding boxes intersect.
+- Elements within page bounds: All right edges < 9,144,000 EMU. All bottom edges < 5,143,500 EMU.
+- Sufficient margins: Content should be ≥ 457,200 EMU (0.5") from slide edges.
+- Sufficient gaps: At least 150,000 EMU (~0.16") between elements; 228,600 EMU (~0.25") is better.
+
+## Text Overflow Checks
+- Check estimatedOverflow: false on all text boxes.
+- Compare estimatedContentHeight to the text box’s actual height.
+- If autofit was used, check scaleFactor — values below ~0.7 mean the box is too small.
+
+## Formatting Quality Checks
+- Text hierarchy is visible: Can you immediately distinguish headings from body text from captions?
+- No single-color/single-size text boxes where hierarchy should exist (e.g., KPI cards, bullet lists with lead-in phrases).
+- Font sizes are readable: Nothing below 14pt.
+- Alignment is appropriate: Body text LEFT-aligned, not center-aligned.
+- Colors create contrast: Accent colors for emphasis, muted colors for secondary info, correct text color for the background.
+
+## Common Issues to Watch For
+- autofit reported as type: "NONE" on read-back even when applied during creation — this is a known reporting issue (GitHub #611), not a bug
+- Default placeholder elements (i0, i1) not deleted on first slide — these overlap custom content
+- z-order: get_slide_content_elements returns elements in z-order, later elements render on top — verify layering is correct
+- Master element injection via set_master_elements may add decorative shapes to every new slide — account for these in layout
+
+## If Verification Fails
+Fix the issue and re-run verification. If a text box overflows, try: (1) enlarging the box, (2) reducing content, (3) splitting across two boxes. If elements overlap, adjust positions. Never ship a slide that fails verification.
