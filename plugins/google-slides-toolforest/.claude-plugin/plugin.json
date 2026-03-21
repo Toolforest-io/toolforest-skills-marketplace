@@ -2,6 +2,8 @@
   "name": "google-slides-toolforest",
   "description": "Best practices for building Google Slides presentations via Toolforest MCP. Covers design patterns, font selection, chart pipelines, image encoding, and slide verification.",
   "version": "1.0.0",
-  "author": "Toolforest (toolforest.io)",
+  "author": {
+    "name": "Toolforest (toolforest.io)"
+  },
   "skills": ["./"]
 }
