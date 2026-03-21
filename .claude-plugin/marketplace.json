@@ -1,8 +1,11 @@
 {
   "name": "toolforest-skills",
-  "description": "Agent skills for Toolforest MCP toolkits — Google Slides, Docs, Sheets, and more.",
-  "version": "1.0.0",
-  "author": "Toolforest (toolforest.io)",
+  "owner": {
+    "name": "Toolforest (toolforest.io)"
+  },
+  "metadata": {
+    "description": "Agent skills for Toolforest MCP toolkits — Google Slides, Docs, Sheets, and more."
+  },
   "plugins": [
     {
       "name": "google-slides-toolforest",
