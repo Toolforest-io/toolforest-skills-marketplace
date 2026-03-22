@@ -2,7 +2,8 @@ Read this file when creating tables or text-heavy slides. The multi-run techniqu
 ## Table Creation
 - Use create_table with values for initial content, headerFillColorHex for styled headers
 - alternateRowColorHex adds automatic row striping
-- Table dimensions in get_slide_content_elements may show defaults (3,000,000 × 3,000,000) even when created differently — this is a reporting quirk, not a layout bug
+- Set autofit: true to automatically shrink header and body font sizes to fit within the specified table height (assumes Arial metrics). Set minFontSize to control the floor (default 8pt). Check autofitApplied and scaleFactor in the response — values below ~0.7 mean the table is too dense for the space.
+- get_slide_content_elements returns estimatedContentHeight and estimatedOverflow for tables, plus an autofit field showing whether autofit was applied and the scale factor used
 
 ## Multi-Run Text Formatting — The Key to Visual Hierarchy
 The add_text_box tool supports multiple runs per paragraph, each with independent font size, color, bold/italic, and font family. Always use this to create proper hierarchy. Never default to a single font size and color for an entire text box.
