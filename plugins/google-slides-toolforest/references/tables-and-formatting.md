@@ -2,17 +2,18 @@ Read this file when creating tables or text-heavy slides. The multi-run techniqu
 ## Table Creation
 - Use create_table with values for initial content, headerFillColorHex for styled headers
 - alternateRowColorHex adds automatic row striping
-- Set autofit: true to automatically shrink header and body font sizes to fit within the specified table height (assumes Arial metrics). Set minFontSize to control the floor (default 8pt). Check autofitApplied and scaleFactor in the response — values below ~0.7 mean the table is too dense for the space.
+- Set autofit: true to automatically shrink header and body font sizes to fit within the specified table height (assumes Arial metrics). Set minFontSize: 10 to control the floor. Check autofitApplied and scaleFactor in the response — values below 0.7 mean the table is too dense for the space and MUST be rebuilt (enlarge the table, reduce content, or split across slides).
 - get_slide_content_elements returns estimatedContentHeight and estimatedOverflow for tables, plus an autofit field showing whether autofit was applied and the scale factor used
 
 ## Multi-Run Text Formatting — The Key to Visual Hierarchy
 The add_text_box tool supports multiple runs per paragraph, each with independent font size, color, bold/italic, and font family. Always use this to create proper hierarchy. Never default to a single font size and color for an entire text box.
-### Minimum Font Size Rules
-- Never set any text below 14pt — reduce content or increase the text box instead
-- Preferred body text: 16pt
-- Title/header: 24–40pt
+### Minimum Font Size Rules (Tiered)
+- Title/header: 24–40pt bold
+- Section header: 20–26pt bold
 - KPI/stat numbers: 28–48pt (accent color, bold)
-- Labels and captions: 14–16pt
+- Body text, bullets, descriptions: 14–16pt (14pt is the floor for body content)
+- KPI labels, captions, muted annotations: 10–12pt
+- Nothing below 10pt — ever. If autofit scales any text below 10pt, the element must be rebuilt.
 
 ### Example: KPI Card with Multi-Run Hierarchy
 ❌ Bad pattern (flat, uniform):
@@ -22,7 +23,7 @@ paragraphs: [{"runs": [{"text": "17M+\nEVs Sold",
 paragraphs: [{"runs": [
   {"text": "17M+", "fontSize": 36, "bold": true,
    "textColorHex": "#00D4AA"},
-  {"text": "\nEVs Sold in 2024", "fontSize": 14,
+  {"text": "\nEVs Sold in 2024", "fontSize": 12,
    "textColorHex": "#A0AEC0"}
 ], "alignment": "LEFT"}]
 ### Where to Apply Multi-Run Formatting

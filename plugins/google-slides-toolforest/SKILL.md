@@ -12,11 +12,42 @@ description: >
 
 Follow these steps for every presentation build:
 
-- 1. Create presentation → create_presentation returns presentationId, default slide ID, available layouts, and page dimensions (standard: 9,144,000 × 5,143,500 EMU).
-- 2. Set theme → set_theme for master background, default text color, heading + body font families, accent colors. Never skip this step. Never default to Arial — always choose an intentional pairing (see references/fonts.md).
-- 3. Build each slide → Use add_slide with layoutId (prefer "p12" / BLANK for full control). Populate with shapes, text boxes, tables. Delete default placeholders (i0, i1) on first slide if building a custom title.
-- 4. Verify each slide → After building, call get_slide_content_elements and run the verification checklist (see scripts/verify_slide.md). Fix issues before moving on.
-- 5. Iterate → Rework any slide that fails verification. Never ship a slide you haven't checked.
+1. **Create presentation** → create_presentation returns presentationId, default slide ID, available layouts, and page dimensions (standard: 9,144,000 × 5,143,500 EMU).
+2. **Set theme** → set_theme for master background, default text color, heading + body font families, accent colors. Never skip this step. Never default to Arial — always choose an intentional pairing (see references/fonts.md).
+3. **Build and verify each slide — ONE AT A TIME.** For each slide, complete ALL of the following before moving to the next:
+
+   a. **Add the slide** → Use add_slide with layoutId (prefer "p12" / BLANK for full control). Delete default placeholders (i0, i1) on first slide if building a custom title.
+   b. **Populate the slide** → Add shapes, text boxes, tables, images.
+   c. **Verify the slide** → Call get_slide_content_elements and check EVERY element against the verification checks below.
+   d. **Fix any failures** → If any check fails, fix the issue, then re-verify. Repeat until the slide passes.
+   e. **Only then move to the next slide.**
+
+### Mandatory Verification Checks (Run After EVERY Slide)
+
+After calling get_slide_content_elements, check ALL of the following. If ANY check fails, fix and re-verify before proceeding.
+
+**Layout:**
+- All right edges (x + width) < 9,144,000 EMU
+- All bottom edges (y + height) < 5,143,500 EMU
+- No overlapping elements (compare bounding boxes of all element pairs)
+- Content ≥ 457,200 EMU from slide edges
+- ≥ 150,000 EMU gap between elements (228,600 EMU preferred)
+
+**Text overflow:**
+- estimatedOverflow: false on all text boxes and tables
+- If autofit was used: scaleFactor ≥ 0.7. If below 0.7, the element MUST be rebuilt — enlarge the box, reduce content, or split across elements.
+
+**Font sizes (tiered minimum):**
+- Body text, bullets, descriptions: ≥ 14pt
+- KPI labels and captions: ≥ 10pt
+- Nothing below 10pt — ever. If any text is below 10pt, delete and rebuild the element.
+
+**Formatting quality:**
+- Text hierarchy is visible — headings, body, and captions are clearly distinct
+- Body text is LEFT-aligned, not centered
+- Colors create proper contrast against the background
+
+For the full checklist including common issues and z-order checks, see scripts/verify_slide.md.
 
 ### Critical Gotchas (Read These First)
 
@@ -24,10 +55,11 @@ These are the highest-signal failure points. They are non-obvious and will waste
 
 ### Gotcha 1: autofit Is Boolean, Not String
 
-Always set autofit: true + minFontSize: 8 on content text boxes. Check scaleFactor in the response — values below ~0.7 mean the box is too small.
+Always set autofit: true + minFontSize: 10 on content text boxes. Check scaleFactor in the response — values below 0.7 mean the box is too small and MUST be rebuilt.
 
-✅ autofit: true, minFontSize: 8
+✅ autofit: true, minFontSize: 10
 ❌ autofit: "SHAPE_AUTOFIT" → ValidationError
+❌ minFontSize: 8 → allows illegible text
 
 ### Gotcha 2: Hex Encoding for Images, Never Base64
 
@@ -46,6 +78,18 @@ Use create_gradient to add gradient backgrounds and rectangular fills. Supports 
 
 Google Slides cannot embed fonts. Licensed fonts (Proxima Nova, Avenir, Helvetica Neue, Futura) fall back silently to a default. Stick to Google Fonts catalog. See references/fonts.md for safe pairings.
 
+### Font Size Reference (Quick Look)
+
+| Element | Size |
+|---------|------|
+| Slide title | 24–40pt bold |
+| Section header | 20–26pt bold |
+| KPI / stat numbers | 28–48pt bold, accent color |
+| Body text, bullets | 14–16pt |
+| KPI labels, captions | 10–12pt muted |
+
+Nothing below 10pt — ever.
+
 ## Reference Files
 
 Claude should read these on demand — not all at once.
@@ -53,6 +97,6 @@ Claude should read these on demand — not all at once.
 - references/design-patterns.md — Layout patterns (header bars, card grids, KPI callouts, two-column splits), color palettes for dark/light/accent backgrounds. Read when designing slide layouts.
 - references/fonts.md — Font pairing recommendations by audience/tone, common mistakes, Google Fonts availability. Read when choosing typography.
 - references/images-and-charts.md — Image embedding via hex encoding, size constraints, Sheets→Slides chart pipeline. Read when adding images or data visualizations.
-- references/tables-and-formatting.md — Table creation, multi-run text formatting for visual hierarchy, minimum font size rules, alignment rules. Read when creating tables or text-heavy slides.
-- scripts/verify_slide.md — Verification checklist to run after every slide. Read before starting verification.
+- references/tables-and-formatting.md — Table creation, multi-run text formatting for visual hierarchy, alignment rules. Read when creating tables or text-heavy slides.
+- scripts/verify_slide.md — Full verification checklist with common issues and edge cases. The critical checks are already inline above — this file has additional detail.
 - config.json — User preferences (theme colors, font pairing, margin style). If this file doesn't exist, ask the user for preferences or use sensible defaults.

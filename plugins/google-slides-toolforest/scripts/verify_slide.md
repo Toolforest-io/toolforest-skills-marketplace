@@ -8,12 +8,12 @@ Run this checklist after building EVERY slide. Call get_slide_content_elements a
 ## Text and Table Overflow Checks
 - Check estimatedOverflow: false on all text boxes and tables.
 - Compare estimatedContentHeight to the element’s actual height.
-- If autofit was used (text boxes or tables), check scaleFactor — values below ~0.7 mean the element is too small for the content.
+- If autofit was used (text boxes or tables), check scaleFactor — values below 0.7 mean the element is too small for the content. **This is a hard failure: delete and rebuild the element** (enlarge the box, reduce content, or split across elements).
 
 ## Formatting Quality Checks
 - Text hierarchy is visible: Can you immediately distinguish headings from body text from captions?
 - No single-color/single-size text boxes where hierarchy should exist (e.g., KPI cards, bullet lists with lead-in phrases).
-- Font sizes are readable: Nothing below 14pt.
+- Font sizes are readable: Body text ≥ 14pt. KPI labels and captions ≥ 10pt. Nothing below 10pt — ever.
 - Alignment is appropriate: Body text LEFT-aligned, not center-aligned.
 - Colors create contrast: Accent colors for emphasis, muted colors for secondary info, correct text color for the background.
 

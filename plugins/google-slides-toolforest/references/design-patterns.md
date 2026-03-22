@@ -15,9 +15,11 @@ This creates a strong visual anchor. Every content slide should use this unless 
 - Minimum gap between cards: 228,600 EMU (~0.25")
 
 ## Layout Pattern: Big Stat / KPI Callout
-- Large number: 40–48pt, accent color (#00B874), bold
+- Large number: 28–48pt, accent color (#00B874), bold
 - Label below: 10–12pt, bold, body color
-- Description below label: 9–10pt, muted color
+- Description below label: 10–12pt, muted color
+
+Note: The absolute minimum for any text is 10pt. Nothing below 10pt — ever.
 
 Use multiple runs in a single text box to achieve this hierarchy — never flatten to one font size. See references/tables-and-formatting.md for the multi-run technique.
 ## Layout Pattern: Two-Column Split
