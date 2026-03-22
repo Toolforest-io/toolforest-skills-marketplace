@@ -1,6 +1,6 @@
 Read this file when choosing typography for a presentation. All fonts must be from the Google Fonts catalog — anything else falls back silently.
 ## Safe Fonts (Confirmed Working)
-- Google Fonts: Montserrat, Inter, Roboto, Lato, Open Sans, Poppins, Playfair Display, Raleway, Oswald, Source Sans Pro, DM Sans, Space Grotesk, IBM Plex Sans, IBM Plex Mono, Merriweather, Archivo, Nunito, DM Serif Display, Karla, Roboto Mono
+- Google Fonts: Montserrat, Inter, Roboto, Lato, Open Sans, Poppins, Playfair Display, Raleway, Oswald, Source Sans 3, DM Sans, Space Grotesk, IBM Plex Sans, IBM Plex Mono, Merriweather, Archivo, Nunito, DM Serif Display, Karla, Roboto Mono
 - System fonts (widely available): Arial, Calibri, Trebuchet MS, Georgia
 - Will NOT render: Proxima Nova, Avenir, Helvetica Neue, Futura, SF Pro (licensed — fall back silently)
 
@@ -9,7 +9,7 @@ Always use contrasting fonts for heading vs body — never the same font at diff
 - Executive / Boardroom: Playfair Display + Lato — Serif heading adds editorial authority
 - Tech / Startup: Poppins + Inter — Round + neutral = modern, approachable
 - Creative / Design: DM Serif Display + Karla — Distinctive serif + humanist sans
-- Corporate / Consulting: Montserrat + Source Sans Pro — Geometric + humanist = clean, professional
+- Corporate / Consulting: Montserrat + Source Sans 3 — Geometric + humanist = clean, professional
 - Data-heavy / Analytical: IBM Plex Sans + IBM Plex Mono — Structured, precise, monospace for data
 - Bold / Impactful: Oswald + Roboto — Condensed heading creates weight contrast
 
