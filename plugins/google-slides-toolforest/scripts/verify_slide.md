@@ -10,11 +10,12 @@ Run this checklist after building EVERY slide. Call get_slide_content_elements a
 - Compare estimatedContentHeight to the element’s actual height.
 - If autofit was used (text boxes or tables), check scaleFactor — values below 0.7 mean the element is too small for the content. **This is a hard failure: delete and rebuild the element** (enlarge the box, reduce content, or split across elements).
 
-## Contrast Checks
-- Check contrastRatio on all text elements — minimum 4.5:1 for body text (WCAG AA), 3.0:1 for large text (>=18pt or >=14pt bold)
-- If contrastSufficient is false, the text may be invisible or hard to read — change the text color or background
+## Contrast Checks (from get_slide_content_elements)
+- Text elements include `contrastRatio` (float) and `contrastSufficient` (boolean) when a background color is available
+- Minimum `contrastRatio`: 4.5:1 for body text (WCAG AA), 3.0:1 for large text (>=18pt or >=14pt bold)
+- If `contrastSufficient` is false, the text may be invisible or hard to read — change the text color or background
 - Common problems: default black text (#000000) on dark backgrounds, white text on light backgrounds, muted gray text on medium backgrounds
-- set_theme will warn if the default text color has poor contrast against the master background — fix the theme before building slides
+- `set_theme` will warn if the default text color has poor contrast against the master background — fix the theme before building slides
 
 ## Formatting Quality Checks
 - Text hierarchy is visible: Can you immediately distinguish headings from body text from captions?
