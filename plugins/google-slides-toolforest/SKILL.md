@@ -12,11 +12,11 @@ description: >
 
 Follow these steps for every presentation build:
 
-1. **Create presentation** → create_presentation returns presentationId, default slide ID, available layouts, and page dimensions (standard: 9,144,000 × 5,143,500 EMU).
+1. **Create presentation** → create_presentation returns presentation_id, default slide ID, available layouts, and page dimensions (standard: 9,144,000 × 5,143,500 EMU).
 2. **Set theme** → set_theme for master background, default text color, heading + body font families, accent colors. Never skip this step. Never default to Arial — always choose an intentional pairing (see references/fonts.md).
 3. **Build and verify each slide — ONE AT A TIME.** For each slide, complete ALL of the following before moving to the next:
 
-   a. **Add the slide** → Use add_slide with layoutId (prefer "p12" / BLANK for full control). Delete default placeholders (i0, i1) on first slide if building a custom title.
+   a. **Add the slide** → Use add_slide with layout_id (prefer "p12" / BLANK for full control). Delete default placeholders (i0, i1) on first slide if building a custom title.
    b. **Populate the slide** → Add shapes, text boxes, tables, images.
    c. **Verify the slide** → Call get_slide_content_elements and check EVERY element against the verification checks below.
    d. **Fix any failures** → If any check fails, fix the issue, then re-verify. Repeat until the slide passes.
@@ -35,7 +35,7 @@ After calling get_slide_content_elements, check ALL of the following. If ANY che
 
 **Text overflow:**
 - estimatedOverflow: false on all text boxes and tables
-- If autofit was used: scaleFactor ≥ 0.7. If below 0.7, the element MUST be rebuilt — enlarge the box, reduce content, or split across elements.
+- If autofit was used: scale_factor ≥ 0.7. If below 0.7, the element MUST be rebuilt — enlarge the box, reduce content, or split across elements.
 
 **Font sizes (tiered minimum):**
 - Body text, bullets, descriptions: ≥ 14pt
@@ -55,18 +55,18 @@ These are the highest-signal failure points. They are non-obvious and will waste
 
 ### Gotcha 1: autofit Is Boolean, Not String
 
-Always set autofit: true + minFontSize: 10 on content text boxes. Check scaleFactor in the response — values below 0.7 mean the box is too small and MUST be rebuilt.
+Always set autofit: true + min_font_size: 10 on content text boxes. Check scale_factor in the response — values below 0.7 mean the box is too small and MUST be rebuilt.
 
-✅ autofit: true, minFontSize: 10
+✅ autofit: true, min_font_size: 10
 ❌ autofit: "SHAPE_AUTOFIT" → ValidationError
-❌ minFontSize: 8 → allows illegible text
+❌ min_font_size: 8 → allows illegible text
 
 ### Gotcha 2: Hex Encoding for Images, Never Base64
 
 Claude/Cowork's content filter scans outgoing tool parameters for API key-like patterns. Base64 image data can trigger this, silently corrupting the image. Always use hex encoding.
 
-✅ imageEncoding: "hex", imageData: "89504e470d0a1a0a..."
-❌ imageEncoding: "base64" (may be corrupted by content filter)
+✅ image_encoding: "hex", image_data: "89504e470d0a1a0a..."
+❌ image_encoding: "base64" (may be corrupted by content filter)
 
 Always read hex data from file programmatically. Never hand-type or split hex strings manually.
 

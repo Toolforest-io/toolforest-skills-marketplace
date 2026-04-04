@@ -8,7 +8,7 @@ Run this checklist after building EVERY slide. Call get_slide_content_elements a
 ## Text and Table Overflow Checks
 - Check estimatedOverflow: false on all text boxes and tables.
 - Compare estimatedContentHeight to the element’s actual height.
-- If autofit was used (text boxes or tables), check scaleFactor — values below 0.7 mean the element is too small for the content. **This is a hard failure: delete and rebuild the element** (enlarge the box, reduce content, or split across elements).
+- If autofit was used (text boxes or tables), check scale_factor — values below 0.7 mean the element is too small for the content. **This is a hard failure: delete and rebuild the element** (enlarge the box, reduce content, or split across elements).
 
 ## Contrast Checks
 - Check contrastRatio on all text elements — minimum 4.5:1 for body text (WCAG AA), 3.0:1 for large text (>=18pt or >=14pt bold)
@@ -25,7 +25,7 @@ Run this checklist after building EVERY slide. Call get_slide_content_elements a
 
 ## Common Issues to Watch For
 - Text box autofit reported as googleAutofitType: "NONE" on read-back even when applied during creation — this is expected because Toolforest pre-scales font sizes at creation time
-- Table autofit is reported correctly via the autofit field (autofitApplied, scaleFactor) stored as presentation metadata
+- Table autofit is reported correctly via the autofit field (autofitApplied, scale_factor) stored as presentation metadata
 - Default placeholder elements (i0, i1) not deleted on first slide — these overlap custom content
 - z-order: get_slide_content_elements returns elements in z-order, later elements render on top — verify layering is correct
 - Master element injection via set_master_elements may add decorative shapes to every new slide — account for these in layout
