@@ -42,4 +42,4 @@ Use create_gradient to add gradient backgrounds and rectangular gradient fills t
 - Rectangular gradient fills — place anywhere at any size to simulate a gradient-filled rectangle.
 - Limitation: create_gradient produces rectangular images. For non-rectangular shapes (rounded rectangles, circles), the gradient won't clip to the shape's edges. For those, layer the gradient behind a shape with a transparent fill, which only partially works.
 
-For additional visual depth, also consider: alternating dark/light backgrounds, semi-transparent overlays via fillAlpha, accent-colored bars and dividers, and contrasting card colors.
+For additional visual depth, also consider: alternating dark/light backgrounds, semi-transparent overlays via fill_alpha, accent-colored bars and dividers, and contrasting card colors.

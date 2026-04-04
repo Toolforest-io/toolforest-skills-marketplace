@@ -1,8 +1,8 @@
 Read this file when creating tables or text-heavy slides. The multi-run technique is essential for professional-quality output.
 ## Table Creation
-- Use create_table with values for initial content, headerFillColorHex for styled headers
-- alternateRowColorHex adds automatic row striping
-- Set autofit: true to automatically shrink header and body font sizes to fit within the specified table height (assumes Arial metrics). Set minFontSize: 10 to control the floor. Check autofitApplied and scaleFactor in the response — values below 0.7 mean the table is too dense for the space and MUST be rebuilt (enlarge the table, reduce content, or split across slides).
+- Use create_table with values for initial content, header_fill_color_hex for styled headers
+- alternate_row_color_hex adds automatic row striping
+- Set autofit: true to automatically shrink header and body font sizes to fit within the specified table height (assumes Arial metrics). Set min_font_size: 10 to control the floor. Check autofitApplied and scale_factor in the response — values below 0.7 mean the table is too dense for the space and MUST be rebuilt (enlarge the table, reduce content, or split across slides).
 - get_slide_content_elements returns estimatedContentHeight and estimatedOverflow for tables, plus an autofit field showing whether autofit was applied and the scale factor used
 
 ## Multi-Run Text Formatting — The Key to Visual Hierarchy
@@ -18,13 +18,13 @@ The add_text_box tool supports multiple runs per paragraph, each with independen
 ### Example: KPI Card with Multi-Run Hierarchy
 ❌ Bad pattern (flat, uniform):
 paragraphs: [{"runs": [{"text": "17M+\nEVs Sold",
-  "fontSize": 14, "textColorHex": "#00D4AA"}]}]
+  "font_size": 14, "text_color_hex": "#00D4AA"}]}]
 ✅ Good pattern (visual hierarchy):
 paragraphs: [{"runs": [
-  {"text": "17M+", "fontSize": 36, "bold": true,
-   "textColorHex": "#00D4AA"},
-  {"text": "\nEVs Sold in 2024", "fontSize": 12,
-   "textColorHex": "#A0AEC0"}
+  {"text": "17M+", "font_size": 36, "bold": true,
+   "text_color_hex": "#00D4AA"},
+  {"text": "\nEVs Sold in 2024", "font_size": 12,
+   "text_color_hex": "#A0AEC0"}
 ], "alignment": "LEFT"}]
 ### Where to Apply Multi-Run Formatting
 - Bullet lists: Bold lead-in phrase in accent color, followed by regular-weight detail in body color
