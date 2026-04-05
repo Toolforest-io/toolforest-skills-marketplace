@@ -55,11 +55,11 @@ These are the highest-signal failure points. They are non-obvious and will waste
 
 ### Gotcha 1: autofit Is Boolean, Not String
 
-Always set autofit: true + min_font_size: 10 on content text boxes. Check scale_factor in the response — values below 0.7 mean the box is too small and MUST be rebuilt.
+Always set autofit: true + min_font_size_pt: 10 on content text boxes. Check scale_factor in the response — values below 0.7 mean the box is too small and MUST be rebuilt.
 
-✅ autofit: true, min_font_size: 10
+✅ autofit: true, min_font_size_pt: 10
 ❌ autofit: "SHAPE_AUTOFIT" → ValidationError
-❌ min_font_size: 8 → allows illegible text
+❌ min_font_size_pt: 8 → allows illegible text
 
 ### Gotcha 2: Hex Encoding for Images, Never Base64
 
