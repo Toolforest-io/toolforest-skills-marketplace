@@ -47,6 +47,12 @@ After calling get_slide_content_elements, check ALL of the following. If ANY che
 - Body text is LEFT-aligned, not centered
 - Colors create proper contrast against the background
 
+**Contrast (from check_presentation and get_slide_content_elements):**
+- `contrastSufficient: true` means the element passes WCAG AA contrast ratio
+- `contrastSufficient: false` means text color doesn't have enough contrast against its background
+- To fix: use `update_element_style` to change the text color on that specific element, or pass explicit `text_color` when creating elements on slides with non-default backgrounds
+- Common cause: `set_page_background` changes one slide's background but the global `default_text_color` (from `set_theme`) still applies — see Gotcha 4 below
+
 For the full checklist including common issues and z-order checks, see scripts/verify_slide.md.
 
 ### Critical Gotchas (Read These First)
@@ -74,7 +80,13 @@ Always read hex data from file programmatically. Never hand-type or split hex st
 
 Use create_gradient to add gradient backgrounds and rectangular fills. Supports full-slide backgrounds (position at 0,0 with slide dimensions) and rectangular gradient fills at any position/size. Limitation: gradients are always rectangular — they won't clip to non-rectangular shapes like rounded rectangles or circles.
 
-### Gotcha 4: Font Rendering — Google Fonts Only
+### Gotcha 4: set_page_background vs default_text_color
+
+`set_theme` sets a global `default_text_color` that applies to ALL slides via all text-creating tools (`add_text_box`, `create_table`, `create_shape`). `set_page_background` changes the background of ONE slide. If the new background conflicts with the global text color, you'll get contrast failures from `check_presentation`.
+
+Fix: after calling `set_page_background`, explicitly set `text_color` on elements for that slide — either pass it directly when creating elements, or use `update_element_style` to change existing elements. Do NOT try to call `set_theme` again or guess non-existent tools to fix contrast.
+
+### Gotcha 5: Font Rendering — Google Fonts Only
 
 Google Slides cannot embed fonts. Licensed fonts (Proxima Nova, Avenir, Helvetica Neue, Futura) fall back silently to a default. Stick to Google Fonts catalog. See references/fonts.md for safe pairings.
 
