@@ -13,7 +13,7 @@ description: >
 Follow these steps for every presentation build:
 
 1. **Create presentation** → create_presentation returns presentation_id, default slide ID, available layouts, and page dimensions (standard: 9,144,000 × 5,143,500 EMU).
-2. **Set theme** → set_theme for master background, default text color, heading + body font families, accent colors. Never skip this step. Never default to Arial — always choose an intentional pairing (see references/fonts.md).
+2. **Set theme** → set_theme for master background, default text color, heading + body font families, accent colors. Never skip this step. Never default to Arial — always choose an intentional pairing (see references/fonts.md). If the user's request implies a specific audience or mood (boardroom, creative pitch, data-heavy report, high-energy launch), read references/themes.md and apply a matching preset.
 3. **Build and verify each slide — ONE AT A TIME.** For each slide, complete ALL of the following before moving to the next:
 
    a. **Add the slide** → Use add_slide with layout_id (prefer "p12" / BLANK for full control). Delete default placeholders (i0, i1) on first slide if building a custom title.
@@ -67,6 +67,11 @@ Always set autofit: true + min_font_size_pt: 10 on content text boxes. Check sca
 ❌ autofit: "SHAPE_AUTOFIT" → ValidationError
 ❌ min_font_size_pt: 8 → allows illegible text
 
+Two corollaries that bite repeatedly:
+
+- **Pass `min_font_size_pt: 10` on every body text box that might not fit its content** (especially in tight cards). Without the explicit floor, autofit will silently scale below 10pt and violate the hard rule above.
+- **Decorative oversized glyphs need `autofit: false`.** Drop-cap quote marks, big italic numerals, condensed display type at 96pt+ — autofit will scale them below the 0.7 floor every time. Use `autofit: false` and a generously sized box. The verifier may still report `estimatedOverflow: true` for these because display fonts have tall internal metrics; the visible glyph fits fine. Visual check overrides the warning for genuinely decorative glyphs only — never for body text.
+
 ### Gotcha 2: Hex Encoding for Images, Never Base64
 
 Claude/Cowork's content filter scans outgoing tool parameters for API key-like patterns. Base64 image data can trigger this, silently corrupting the image. Always use hex encoding.
@@ -108,6 +113,7 @@ Claude should read these on demand — not all at once.
 
 - references/design-patterns.md — Layout patterns (header bars, card grids, KPI callouts, two-column splits), color palettes for dark/light/accent backgrounds. Read when designing slide layouts.
 - references/fonts.md — Font pairing recommendations by audience/tone, common mistakes, Google Fonts availability. Read when choosing typography.
+- references/themes.md — Alternative theme presets by audience (editorial, creative, analytical, bold). Read when the user requests a different mood than the default Toolforest theme, or when the audience clearly calls for one.
 - references/images-and-charts.md — Image embedding via hex encoding, size constraints, Sheets→Slides chart pipeline. Read when adding images or data visualizations.
 - references/tables-and-formatting.md — Table creation, multi-run text formatting for visual hierarchy, alignment rules. Read when creating tables or text-heavy slides.
 - scripts/verify_slide.md — Full verification checklist with common issues and edge cases. The critical checks are already inline above — this file has additional detail.
