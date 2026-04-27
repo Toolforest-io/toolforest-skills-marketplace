@@ -14,7 +14,7 @@ Always use contrasting fonts for heading vs body — never the same font at diff
 - Bold / Impactful: Oswald + Roboto — Condensed heading creates weight contrast
 
 ## Font Selection Gotchas
-- Never use the same font for heading and body — even at different weights, this creates no real visual contrast
+- Never use the same font for heading and body — even at different weights, this creates no real visual contrast — *unless the theme intentionally uses a strong third typographic element (typically a mono font) that carries semantic weight*. For example, Arctic Mono in references/themes.md uses IBM Plex Sans for both heading and body but pairs it with IBM Plex Mono carrying labels, data, and coordinate strips; that mono voice is the real second voice.
 - Don’t pair two geometric sans-serifs (e.g., Montserrat + Poppins) — they compete rather than complement
 - Display/decorative fonts (Lobster, Pacifico, Permanent Marker) are headings-only — never use for body text
 - Body fonts must be legible at 14–16pt — test mentally: would this be comfortable in a paragraph?
