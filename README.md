@@ -31,6 +31,16 @@ Best practices for building Google Slides presentations via Toolforest MCP. Incl
 
 Requires: Toolforest Google Slides MCP connector
 
+### google-sheets-toolforest
+Best practices for building Google Sheets via Toolforest MCP. Includes:
+- Default Toolforest brand theme + four audience-mapped presets (Boardroom, Eng Scorecard, Ops Tracker, Marketing Rollup)
+- Ten core patterns (template-and-duplicate, INDIRECT cross-tab refs, 2D matrix lookups, dynamic ranking, categorical conditional formatting, freeze/merge layout safety, the PERCENT-format trap, verification trifecta)
+- Batch-wrapper gotchas (camelCase keys, raw API shapes for charts/validation/conditional formats)
+- Common gotchas quick reference
+- End-to-end worked example (multi-tab financial dashboard)
+
+Requires: Toolforest Google Sheets MCP connector
+
 ## Adding New Skills
 
 To add a new toolkit skill (e.g., Google Docs, Sheets, Gmail):
