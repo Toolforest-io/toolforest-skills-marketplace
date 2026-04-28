@@ -15,6 +15,15 @@
       "category": "productivity",
       "tags": ["google-slides", "presentations", "toolforest", "mcp", "design"],
       "strict": true
+    },
+    {
+      "name": "google-sheets-toolforest",
+      "source": "./plugins/google-sheets-toolforest",
+      "description": "Best practices for building Google Sheets via Toolforest MCP. Theme presets, formula patterns, cross-tab references, dashboard layouts, conditional formatting on categorical data, dynamic ranking tables, and batch-wrapper gotchas — all derived from end-to-end builds verified to render cleanly.",
+      "version": "1.0.0",
+      "category": "productivity",
+      "tags": ["google-sheets", "spreadsheets", "dashboards", "toolforest", "mcp"],
+      "strict": true
     }
   ]
 }
