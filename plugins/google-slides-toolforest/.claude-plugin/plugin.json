@@ -1,6 +1,6 @@
 {
   "name": "google-slides-toolforest",
-  "description": "Best practices for building Google Slides presentations via Toolforest MCP. Covers design patterns, font selection, chart pipelines, image encoding, and slide verification.",
+  "description": "Best practices for building Google Slides decks via Toolforest MCP. Theme presets (Midnight Editorial, Sunset Terracotta, Arctic Mono, Tokyo Neon), font and chart pipelines, image encoding gotchas, and slide verification checklists — all derived from end-to-end builds verified to render cleanly.",
   "version": "1.0.0",
   "author": {
     "name": "Toolforest (toolforest.io)"

@@ -43,12 +43,13 @@ Requires: Toolforest Google Sheets MCP connector
 
 ## Adding New Skills
 
-To add a new toolkit skill (e.g., Google Docs, Sheets, Gmail):
+See [`AUTHORING.md`](./AUTHORING.md) for the full conventions on frontmatter, marketplace summaries, and body structure. Quick checklist:
+
 1. Create a new directory under `plugins/`
 2. Add a `.claude-plugin/plugin.json` with the skill metadata
-3. Add a `SKILL.md` with frontmatter and the core workflow
+3. Add a `SKILL.md` with frontmatter (`name` + `description` with `Triggers on:` enumeration plus intent prose) and the core workflow
 4. Add `references/` files for progressive disclosure
-5. Update `marketplace.json` to include the new plugin
+5. Update `.claude-plugin/marketplace.json` to include the new plugin
 
 ## License
 

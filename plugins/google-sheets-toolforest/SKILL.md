@@ -3,11 +3,14 @@ name: google-sheets-toolforest
 description: >
   Use when creating or editing Google Sheets via Toolforest MCP tools.
   Triggers on: create_spreadsheet, create_sheet, update_values,
-  batch_update_values, fill_formula, add_named_range, set_conditional_format,
-  freeze_panes, merge_cells, batch_format_cells, batch_create_chart,
-  duplicate_sheet, set_data_validation, check_spreadsheet_errors, or any
-  request to build, design, or modify a multi-tab dashboard, tracker,
-  scorecard, or rollup using Google Sheets through the Toolforest connector.
+  batch_update_values, fill_formula, add_named_range,
+  set_conditional_format, freeze_panes, merge_cells, batch_format_cells,
+  batch_create_chart, duplicate_sheet, set_data_validation, set_notes,
+  get_notes, set_banding, auto_resize_columns, add_filter_view,
+  group_columns, check_spreadsheet_errors, or any request to build,
+  design, or modify a multi-tab dashboard, tracker, scorecard, eval
+  scorecard, or cross-tab rollup using Google Sheets through the
+  Toolforest connector.
 ---
 
 # google-sheets-toolforest
