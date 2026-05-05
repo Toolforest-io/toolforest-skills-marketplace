@@ -29,11 +29,11 @@ For any chart or data visualization, always use Google Sheets → Google Slides 
 ### Sheets Chart Workflow
 Step 1: create_spreadsheet → returns spreadsheet_id
 Step 2: update_values with headers in row 1, data below
-Step 3: create_chart with chartType, sourceRange, title, seriesColors matching the deck’s theme
+Step 3: create_chart with chart_type, source_range, title, series_colors matching the deck’s theme
 Step 4: embed_chart with linking_mode: "LINKED" (live data) or "NOT_LINKED_IMAGE" (static snapshot)
 ### Chart Styling Tips
-- Use seriesColors to match the presentation’s color palette from config.json
-- Set legendPosition: "none" for single-series charts
+- Use series_colors to match the presentation’s color palette from config.json
+- Set legend_position: "none" for single-series charts
 - Control aspect ratio via width/height in create_chart; control slide size via EMU in embed_chart
 
 ### Why Not Matplotlib?
