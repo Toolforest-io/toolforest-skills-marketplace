@@ -7,7 +7,8 @@ Run this checklist after building EVERY slide. Call get_slide_content_elements a
 
 ## Text and Table Overflow Checks
 - Check estimatedOverflow: false on all text boxes and tables.
-- Compare estimatedContentHeight to the element’s actual height.
+- For text boxes, compare estimatedContentHeight to estimatedUsableHeight. Do not compare against raw element height; Google Slides reserves internal vertical text inset.
+- For tables, compare estimatedContentHeight to the element's actual height.
 - If autofit was used (text boxes or tables), check scale_factor — values below 0.7 mean the element is too small for the content. **This is a hard failure: delete and rebuild the element** (enlarge the box, reduce content, or split across elements).
 
 ## Contrast Checks (from get_slide_content_elements)
