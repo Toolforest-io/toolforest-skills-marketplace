@@ -35,6 +35,7 @@ After calling get_slide_content_elements, check ALL of the following. If ANY che
 
 **Text overflow:**
 - estimatedOverflow: false on all text boxes and tables
+- For text boxes, investigate overflow by comparing `estimatedContentHeight` to `estimatedUsableHeight` (not raw element height). Google Slides reserves internal vertical text inset, and `estimatedOverflow` uses the usable height.
 - If autofit was used: scale_factor ≥ 0.7. If below 0.7, the element MUST be rebuilt — enlarge the box, reduce content, or split across elements.
 
 **Font sizes (tiered minimum):**
@@ -70,7 +71,7 @@ Always set autofit: true + min_font_size_pt: 10 on content text boxes. Check sca
 Two corollaries that bite repeatedly:
 
 - **Pass `min_font_size_pt: 10` on every body text box that might not fit its content** (especially in tight cards). Without the explicit floor, autofit will silently scale below 10pt and violate the hard rule above.
-- **Decorative oversized glyphs need `autofit: false`.** Drop-cap quote marks, big italic numerals, condensed display type at 96pt+ — autofit will scale them below the 0.7 floor every time. Use `autofit: false` and a generously sized box. The verifier may still report `estimatedOverflow: true` for these because display fonts have tall internal metrics; the visible glyph fits fine. Visual check overrides the warning for genuinely decorative glyphs only — never for body text.
+- **Decorative oversized glyphs need `autofit: false`.** Drop-cap quote marks, big italic numerals, condensed display type at 96pt+ — autofit will scale them below the 0.7 floor every time. Use `autofit: false` and a generously sized box. If a genuinely decorative glyph reports `estimatedOverflow: true`, compare `estimatedContentHeight` with `estimatedUsableHeight` and use visual verification before overriding the warning. Never override body text overflow.
 
 ### Gotcha 2: Hex Encoding for Images, Never Base64
 
