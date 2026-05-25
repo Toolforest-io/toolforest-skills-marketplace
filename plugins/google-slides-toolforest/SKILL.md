@@ -32,6 +32,7 @@ After calling get_slide_content_elements, check ALL of the following. If ANY che
 - No overlapping elements (compare bounding boxes of all element pairs)
 - Content ≥ 457,200 EMU from slide edges
 - ≥ 150,000 EMU gap between elements (228,600 EMU preferred)
+- Stacked text is measure-then-place: never anchor subtitles, captions, or body text below a variable-height headline using a hardcoded `y`. Verify the upper text box first, then place the lower element at `actual_bottom + gap`, where `actual_bottom = y + max(height, estimatedContentHeight)`.
 
 **Text overflow:**
 - estimatedOverflow: false on all text boxes and tables
@@ -95,6 +96,20 @@ Fix: after calling `set_page_background`, explicitly set `text_color` on element
 ### Gotcha 5: Font Rendering — Google Fonts Only
 
 Google Slides cannot embed fonts. Licensed fonts (Proxima Nova, Avenir, Helvetica Neue, Futura) fall back silently to a default. Stick to Google Fonts catalog. See references/fonts.md for safe pairings.
+
+### Gotcha 6: Stacked Text Needs Measure-Then-Place
+
+Title slides and hero layouts often stack a headline above a subtitle. Display fonts, all-caps text, and multi-line headlines can render taller than their requested box. Do not place the subtitle at a fixed `y` such as `2,850,000` EMU.
+
+Correct sequence:
+
+1. Create the headline with a generous height, or with `autofit: true` and `min_font_size_pt: 10`.
+2. Call `get_slide_content_elements` and read the headline's `estimatedContentHeight`, `height`, and `estimatedOverflow`.
+3. If `estimatedOverflow` is true, rebuild the headline box so `height >= estimatedContentHeight`, reduce the text, or use acceptable autofit with `scale_factor >= 0.7`.
+4. Place the subtitle only after the headline passes: `subtitle_y = headline_y + max(headline_height, estimatedContentHeight) + gap`.
+5. Re-run verification and confirm the headline and subtitle bounding boxes have at least 150,000 EMU between them.
+
+This is mandatory for variable-height title stacks, including Tokyo Neon slides with large Oswald headlines.
 
 ### Font Size Reference (Quick Look)
 

@@ -22,6 +22,25 @@ This creates a strong visual anchor. Every content slide should use this unless 
 Note: The absolute minimum for any text is 10pt. Nothing below 10pt — ever.
 
 Use multiple runs in a single text box to achieve this hierarchy — never flatten to one font size. See references/tables-and-formatting.md for the multi-run technique.
+
+## Layout Pattern: Variable Title Stack
+Use on title, section-divider, and hero slides where a headline sits above a subtitle, deck metadata, or body text.
+
+- Create the headline first with a generous box height. For large display type, start with at least 2,400,000 EMU and allow more for multi-line text.
+- Verify the headline with get_slide_content_elements before placing anything below it.
+- Treat the headline's occupied height as `max(height, estimatedContentHeight)`, not the requested box height alone.
+- Anchor the next text element to `headline_y + occupied_height + gap`. Use at least 228,600 EMU gap for title stacks.
+- If the computed subtitle position pushes the subtitle below the slide margin, rebuild the headline with smaller text, fewer words, or autofit. Do not keep a fixed subtitle `y` and accept overlap.
+
+Example:
+
+```text
+headline_bottom = headline_y + max(headline_height, estimatedContentHeight)
+subtitle_y = headline_bottom + 228600
+```
+
+This pattern is required for Tokyo Neon hero slides with large Oswald headlines because condensed display fonts can exceed their nominal box metrics.
+
 ## Layout Pattern: Two-Column Split
 - Left column: x: 457,200 to ~4,500,000 EMU (stats, cards, data)
 - Right column: x: ~4,800,000 to ~8,700,000 EMU (dark panel with text)

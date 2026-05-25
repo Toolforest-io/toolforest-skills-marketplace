@@ -4,6 +4,7 @@ Run this checklist after building EVERY slide. Call get_slide_content_elements a
 - Elements within page bounds: All right edges < 9,144,000 EMU. All bottom edges < 5,143,500 EMU.
 - Sufficient margins: Content should be ≥ 457,200 EMU (0.5") from slide edges.
 - Sufficient gaps: At least 150,000 EMU (~0.16") between elements; 228,600 EMU (~0.25") is better.
+- Variable stacked text: For text placed below a headline, title, stat, or any other variable-height text box, compute the upper box's occupied bottom as `y + max(height, estimatedContentHeight)`. The lower element must start after that bottom plus the required gap. A fixed `y` for subtitles or captions is a failure if the upper text's measured content height changes.
 
 ## Text and Table Overflow Checks
 - Check estimatedOverflow: false on all text boxes and tables.
@@ -33,4 +34,4 @@ Run this checklist after building EVERY slide. Call get_slide_content_elements a
 - Master element injection via set_master_elements may add decorative shapes to every new slide — account for these in layout
 
 ## If Verification Fails
-Fix the issue and re-run verification. If a text box overflows, try: (1) enlarging the box, (2) reducing content, (3) splitting across two boxes. If elements overlap, adjust positions. Never ship a slide that fails verification.
+Fix the issue and re-run verification. If a text box overflows, try: (1) enlarging the box, (2) reducing content, (3) splitting across two boxes. If stacked text overlaps, fix the upper text box first, then recompute the lower element's `y` from the measured upper bottom plus gap. Never ship a slide that fails verification.
