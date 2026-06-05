@@ -25,7 +25,7 @@ Without the explicit floor, autofit will silently scale below 10pt and violate t
 
 ### 3. Decorative oversized glyphs need `autofit: false`
 
-Drop-cap quote marks, big italic numerals, condensed display type at 96pt+ — autofit will scale them below the 0.7 floor every time. Use `autofit: false` and a generously sized box. If a genuinely decorative glyph reports `estimatedOverflow: true`, compare `estimatedContentHeight` with `estimatedUsableHeight` and use visual verification before overriding the warning. Never override body text overflow.
+Drop-cap quote marks, big italic numerals, condensed display type at 96pt+ — autofit will scale them below the 0.7 floor every time. Use `autofit: false` and a generously sized box. A genuinely decorative glyph may report `estimatedOverflow: true` just because it is tall (compare `estimatedContentHeight` with `estimatedUsableHeight`) — that vertical warning can be acceptable. But `estimatedHorizontalOverflow: true` means the glyph is bleeding sideways out of a too-narrow box: widen it until `estimatedContentWidth ≤ estimatedUsableWidth`. Never override body text overflow of either kind.
 
 ### 4. The same-font-heading-body rule has one exception
 
