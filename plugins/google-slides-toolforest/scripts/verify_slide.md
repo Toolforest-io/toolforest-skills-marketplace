@@ -7,10 +7,14 @@ Run this checklist after building EVERY slide. Call get_slide_content_elements a
 - Variable stacked text: For text placed below a headline, title, stat, or any other variable-height text box, compute the upper box's occupied bottom as `y + max(height, estimatedContentHeight)`. The lower element must start after that bottom plus the required gap. A fixed `y` for subtitles or captions is a failure if the upper text's measured content height changes.
 
 ## Text and Table Overflow Checks
-- Check estimatedOverflow: false on all text boxes and tables.
+- Check estimatedOverflow: false on all text boxes and tables (vertical overflow).
 - For text boxes, compare estimatedContentHeight to estimatedUsableHeight. Do not compare against raw element height; Google Slides reserves internal vertical text inset.
+- Check estimatedHorizontalOverflow: false on all text boxes (horizontal bleed past the left/right edges — the vertical checks cannot detect this). Compare estimatedContentWidth (widest rendered line) to estimatedUsableWidth (box width minus the horizontal inset). It fires only for unbreakable content wider than the box (oversized drop-cap glyphs, big numerals); normally-wrapping text never trips it. Fix by widening the box. A decorative glyph may overflow vertically yet must not overflow horizontally.
 - For tables, compare estimatedContentHeight to the element's actual height.
 - If autofit was used (text boxes or tables), check scale_factor — values below 0.7 mean the element is too small for the content. **This is a hard failure: delete and rebuild the element** (enlarge the box, reduce content, or split across elements).
+
+## Outline (border) Check
+- get_slide_content_elements returns outline_visible on shapes and text boxes: true (border renders), false (hidden), or null (inherited from theme). If a text box was meant to be borderless but reports outline_visible: true, hide it with update_element_style (outline_visible: false).
 
 ## Contrast Checks (from get_slide_content_elements)
 - Text elements include `contrastRatio` (float) and `contrastSufficient` (boolean) when a background color is available

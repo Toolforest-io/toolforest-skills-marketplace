@@ -4,6 +4,7 @@ Read this file when creating tables or text-heavy slides. The multi-run techniqu
 - alternate_row_color adds automatic row striping
 - Set autofit: true to automatically shrink header and body font sizes to fit within the specified table height (assumes Arial metrics). Set min_font_size_pt: 10 to control the floor. Check autofitApplied and scale_factor in the response — values below 0.7 mean the table is too dense for the space and MUST be rebuilt (enlarge the table, reduce content, or split across slides).
 - get_slide_content_elements returns estimatedContentHeight and estimatedOverflow for tables, plus an autofit field showing whether autofit was applied and the scale factor used
+- For text boxes (not tables), get_slide_content_elements also returns estimatedContentWidth / estimatedUsableWidth / estimatedHorizontalOverflow to catch horizontal bleed (e.g. oversized drop-cap glyphs), and outline_visible to catch a stray border
 
 ## Multi-Run Text Formatting — The Key to Visual Hierarchy
 The add_text_box tool supports multiple runs per paragraph, each with independent font size, color, bold/italic, and font family. Always use this to create proper hierarchy. Never default to a single font size and color for an entire text box.

@@ -34,10 +34,15 @@ After calling get_slide_content_elements, check ALL of the following. If ANY che
 - ≥ 150,000 EMU gap between elements (228,600 EMU preferred)
 - Stacked text is measure-then-place: never anchor subtitles, captions, or body text below a variable-height headline using a hardcoded `y`. Verify the upper text box first, then place the lower element at `actual_bottom + gap`, where `actual_bottom = y + max(height, estimatedContentHeight)`.
 
-**Text overflow:**
+**Text overflow (vertical):**
 - estimatedOverflow: false on all text boxes and tables
 - For text boxes, investigate overflow by comparing `estimatedContentHeight` to `estimatedUsableHeight` (not raw element height). Google Slides reserves internal vertical text inset, and `estimatedOverflow` uses the usable height.
 - If autofit was used: scale_factor ≥ 0.7. If below 0.7, the element MUST be rebuilt — enlarge the box, reduce content, or split across elements.
+
+**Text overflow (horizontal):**
+- `estimatedHorizontalOverflow: false` on all text boxes. `true` means content bleeds past the box's left/right edges — the vertical checks above cannot detect this.
+- Investigate by comparing `estimatedContentWidth` (widest rendered line) to `estimatedUsableWidth` (box width minus the horizontal inset). Normally-wrapping text never trips this; it fires for unbreakable content wider than the box — oversized drop-cap glyphs, big display numerals, or a forced single line.
+- To fix: widen the box so `estimatedContentWidth ≤ estimatedUsableWidth`. A decorative glyph may legitimately overflow *vertically* (tall by nature), but `estimatedHorizontalOverflow: true` is a real bleed — fix it.
 
 **Font sizes (tiered minimum):**
 - Body text, bullets, descriptions: ≥ 14pt
@@ -72,7 +77,7 @@ Always set autofit: true + min_font_size_pt: 10 on content text boxes. Check sca
 Two corollaries that bite repeatedly:
 
 - **Pass `min_font_size_pt: 10` on every body text box that might not fit its content** (especially in tight cards). Without the explicit floor, autofit will silently scale below 10pt and violate the hard rule above.
-- **Decorative oversized glyphs need `autofit: false`.** Drop-cap quote marks, big italic numerals, condensed display type at 96pt+ — autofit will scale them below the 0.7 floor every time. Use `autofit: false` and a generously sized box. If a genuinely decorative glyph reports `estimatedOverflow: true`, compare `estimatedContentHeight` with `estimatedUsableHeight` and use visual verification before overriding the warning. Never override body text overflow.
+- **Decorative oversized glyphs need `autofit: false`.** Drop-cap quote marks, big italic numerals, condensed display type at 96pt+ — autofit will scale them below the 0.7 floor every time. Use `autofit: false` and a generously sized box. A genuinely decorative glyph may report `estimatedOverflow: true` simply because it is tall (compare `estimatedContentHeight` with `estimatedUsableHeight`) — that vertical warning can be acceptable. But `estimatedHorizontalOverflow: true` means the glyph is bleeding sideways out of its box: the box is too narrow — widen it until `estimatedContentWidth ≤ estimatedUsableWidth`. Never override body text overflow of either kind.
 
 ### Gotcha 2: Hex Encoding for Images, Never Base64
 
