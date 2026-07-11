@@ -1,0 +1,9 @@
+{
+  "name": "eo-toolforest",
+  "description": "Workflows and gotchas for satellite imagery via Toolforest MCP: clearest-scene snapshots, NDVI/NDWI statistics, and the geo→eo→google_docs composition flow. Encodes the routing rules (never image_gen for real places), AOI handoff and simplification limits, Sentinel-2 expectations, and render-URL lifetimes — all verified in live ChatGPT eval sessions.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Toolforest (toolforest.io)"
+  },
+  "skills": ["./"]
+}

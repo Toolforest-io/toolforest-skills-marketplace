@@ -1,0 +1,22 @@
+{
+  "defaults": {
+    "collection": "sentinel-2-l2a",
+    "visualization": "true_color",
+    "max_cloud_cover": 20,
+    "render_width": 768,
+    "aoi_buffer_m": 10000,
+    "stats_interval": "P1M"
+  },
+  "limits": {
+    "aoi_simplify_target_vertices": 20,
+    "daily_interval_max_days": 400,
+    "image_url_lifetime_hours": 24
+  },
+  "ndvi_bands": {
+    "water_or_rock": "< 0",
+    "bare": "0 to 0.2",
+    "sparse": "0.2 to 0.4",
+    "healthy": "0.4 to 0.6",
+    "dense": "> 0.6"
+  }
+}
